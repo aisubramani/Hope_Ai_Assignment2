@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>BioExplain AI</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            display: flex;
+            justify-content: center;
+            padding-top: 40px;
+        }
+        .chatbox {
+            width: 700px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 12px rgba(0,0,0,0.1);
+        }
+        textarea {
+            width: 100%;
+            height: 120px;
+            padding: 10px;
+            font-size: 14px;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 25px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .response {
+            margin-top: 25px;
+            background: #eef2f5;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        h2 {
+            margin-bottom: 5px;
+        }
+        h3 {
+            margin-top: 20px;
+        }
+        ul {
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="chatbox">
+    <h2>🧠 BioExplain AI</h2>
+    <p>Paste biomedical text below 👇</p>
+
+    <form method="post">
+        <textarea name="text" placeholder="Enter biomedical text here..." required></textarea>
+        <br>
+        <button type="submit">Explain</button>
+    </form>
+
+    {% if explanation %}
+    <div class="response">
+        <h3>Explanation</h3>
+        <div>{{ explanation | safe }}</div>
+
+        <h3>Real-world Example</h3>
+        <div>{{ example | safe }}</div>
+    </div>
+    {% endif %}
+</div>
+
+</body>
+</html>
