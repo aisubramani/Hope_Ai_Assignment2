@@ -1,0 +1,88 @@
+=============================================================================
+             PrivateRAG AI - HOW TO RUN GUIDE
+=============================================================================
+Developed by: Dr. Subramani Suresh
+Project: Private, Offline Document Intelligence System
+
+This guide outlines the exact steps to set up and run PrivateRAG AI on your
+local Windows, Mac, or Linux machine.
+
+Download tool from here:  
+https://github.com/aisubramani/Hope_Ai_Assignment2/tree/main/Week16_RAG(Retrieval_Augmented_Generative)/download/
+
+Download privaterag_ai.zip --> privaterag_ai and unzip to your local machine
+-----------------------------------------------------------------------------
+STEP 1: INSTALL OLLAMA (Local AI Runtime)
+-----------------------------------------------------------------------------
+1. Download Ollama from the official website:
+   https://ollama.com/download
+
+2. Install it on your system.
+   - Once installed, verify it is running by opening a terminal/command prompt 
+     and typing:
+     >ollama --version
+
+-----------------------------------------------------------------------------
+STEP 2: DOWNLOAD AI MODELS
+-----------------------------------------------------------------------------
+Open your terminal (Command Prompt or PowerShell) and run the following 
+commands one by one. This will download the brain of the AI to your computer.
+
+1. Download the Main LLM (Llama 3):
+   >ollama pull llama3
+
+2. Download the Embedding Model (for document understanding):
+   >ollama pull nomic-embed-text
+
+*Note: The download size is approx 4-5 GB total. It may take some time depending
+on your internet speed.*
+
+-----------------------------------------------------------------------------
+STEP 3: INSTALL PYTHON DEPENDENCIES
+-----------------------------------------------------------------------------
+Ensure you have Python installed (Version 3.10 or higher recommended).
+
+Copy project(privaterag_ai) folder to your local machine
+1. Open your terminal in this project folder anconda prompt:
+   >cd c:\your_path\privaterag_ai
+
+2. Install the required Python libraries anconda prompt:
+   >pip install -r requirements.txt
+
+-----------------------------------------------------------------------------
+STEP 4: RUN THE APPLICATION
+-----------------------------------------------------------------------------
+1. In the same terminal, run the following command anconda prompt:
+   >streamlit run app.py
+
+2. Your default web browser will automatically open to the application URL:
+   http://localhost:8501
+
+-----------------------------------------------------------------------------
+STEP 5: HOW TO USE
+-----------------------------------------------------------------------------
+1. Upload Documents:
+   - Go to the Sidebar on the left.
+   - Click "Browse files" to upload PDF, DOCX, TXT, or MD files.
+   - Or paste a local folder path.
+
+2. Index Knowledge Base:
+   - Click the "Index Documents" button.
+   - Wait for the "Vault Status" to turn ACTIVE.
+
+3. Chat:
+   - You will be automatically redirected to the "AI Chatbot" tab.
+   - Ask any question about your documents!
+   - Examples: "Summarize the key findings", "What does Figure 2 show?", etc.
+
+-----------------------------------------------------------------------------
+TROUBLESHOOTING
+-----------------------------------------------------------------------------
+- ERROR: "Ollama connection failed"
+  -> Ensure the Ollama app is running in the background (check your taskbar).
+
+- ERROR: "Model not found"
+  -> Re-run the commands in Step 2 to ensure models downloaded correctly.
+
+- ERROR: "Database Locked"
+  -> Click the "DEEP WIPE & RESET VAULT" button in the sidebar to fix it.
