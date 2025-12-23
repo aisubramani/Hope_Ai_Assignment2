@@ -8,7 +8,7 @@ This guide outlines the exact steps to set up and run PrivateRAG AI on your
 local Windows, Mac, or Linux machine.
 
 Download tool from here:  
-https://github.com/aisubramani/Hope_Ai_Assignment2/tree/main/Week16_RAG(Retrieval_Augmented_Generative)/download/
+https://github.com/aisubramani/Hope_Ai_Assignment2/tree/main/Week16_RAG(Retrieval_Augmented_Generative)/download/privaterag_ai.zip
 
 Download privaterag_ai.zip --> privaterag_ai and unzip to your local machine
 -----------------------------------------------------------------------------
@@ -86,3 +86,4 @@ TROUBLESHOOTING
 
 - ERROR: "Database Locked"
   -> Click the "DEEP WIPE & RESET VAULT" button in the sidebar to fix it.
+
