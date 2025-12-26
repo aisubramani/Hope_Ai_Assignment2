@@ -1,6 +1,0 @@
-numpy
-pandas
-wheel
-scikit-learn
-matplotlib
-flask
