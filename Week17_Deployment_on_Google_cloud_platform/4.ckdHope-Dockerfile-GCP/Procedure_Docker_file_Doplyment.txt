@@ -1,0 +1,187 @@
+Note: before this procedure , your flask ml project should work locally. make sure you have requirements.txt which has supporting library.
+
+Step1: Create Google Account
+Step2: Go to Google Console
+Step3: Activate the free Credits
+Step4: Go to IAM from left side three stacked horizontal line 
+Step5: In the left side option "Managed Resource"
+Step6: Click "Create Project"
+Step7: In Project Id: "give proper project name in lower case"
+Step8: Download Google Cloud SDK using below link 
+
+https://dl.google.com/dl/cloudsdk/channels/rapid/GoogleCloudSDKinstaller.exe
+
+Stpe9: Install the downloaded .exe file.
+
+Step10: Download Docker SDK
+
+from below link you can download the docker for windows
+
+https://docs.docker.com/desktop/install/windows-install/
+
+Step11: Install the downloaded file 
+
+Step12: After installation, open --> Command Prompt
+
+Step13:Navigate to the working Directory
+
+Step14: issue this command "docker --version" --> if it is installed properly, it gives the docker version.
+
+Step15: open the working folder in the windows and right click-->New--> Text Document
+
+Step16: paste this code
+
+# Use an official Python runtime as the base image
+FROM python:3.11-slim
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy the current directory contents into the container at /app
+COPY . /app
+
+# Install required Python packages from the requirements file
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Expose the port that the Flask app will run on
+EXPOSE 8080
+
+# Set the default command to run the Flask app (point to main.py)
+#CMD ["python", "main.py"]
+#CMD exec gunicorn --bind :$PORT --worker 1 --theards 8 --timeout 0 app:main
+CMD ["gunicorn", "--bind", ":8080", "--workers", "1", "--threads", "8", "--timeout", "0", "main:app"]
+
+Step17:Go to command prompt and Make you are in the working directory 
+
+issue this command "ren Dockerfile.txt Dockerfile" --> this removes the .txt file extension.
+
+
+=======================================
+step18: gcloud auth login
+
+it opens the browser and ask for the login(please verify the correct account where you have create the google console )
+ 
+step19:gcloud config set project YOUR_PROJECT_ID
+gcloud config set project ckddockergcp-482409
+
+step20:gcloud services enable cloudbuild.googleapis.com
+
+step21:gcloud builds submit --tag gcr.io/YOUR_PROJECT_ID/your_ml_app .
+gcloud builds submit --tag gcr.io/ckddockergcp-482409/ckddocerimagegcp .
+step22:gcloud container images list
+step23:gcloud run deploy --image gcr.io/YOUR_PROJECT_ID/your_ml_app --platform managed
+
+
+
+----------------------
+🚀 Run Docker App on Google Cloud Platform (GCP)
+Using your CKD Flask + ML app
+🧾 Your Project Details (Reference)
+
+Flask file: app.py
+
+Docker image name (local): ckddockerlocal
+
+GCP Project ID: ckddockergcp-482409
+
+Docker image (GCP): gcr.io/ckddockergcp-482409/ckddocerimagegcp
+
+Region: us-central1
+
+Cloud Run service name: ckddocerimagegcp
+
+✅ STEP 1: Prepare Your Project Folder
+
+Your folder must contain:
+
+ckdDockerrun/
+│── app.py
+│── Dockerfile
+│── requirements.txt
+│── finalized_model_ckd.sav
+│── templates/
+│   ├── input.html
+│   └── output.html
+
+✅ STEP 2: Dockerfile (Final – Correct)
+------
+FROM python:3.10-slim
+
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y \
+    build-essential gcc g++ \
+    libglib2.0-0 libsm6 libxext6 libxrender-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+EXPOSE 5000
+
+CMD gunicorn --bind :${PORT:-5000} --workers 1 --threads 8 --timeout 0 app:app
+-------
+✅ STEP 3: Login & Configure GCP (One Time)
+project id: ckddockergcp-482409
+CMD
+
+>gcloud auth login
+>gcloud config set project ckddockergcp-482409
+
+
+Enable required services:
+
+>gcloud services enable run.googleapis.com cloudbuild.googleapis.com
+
+✅ STEP 4: Fix Cloud Build Permission (One Time)
+
+>gcloud projects add-iam-policy-binding ckddockergcp-482409 --member=serviceAccount:648650697336-compute@developer.gserviceaccount.com --role=roles/storage.admin
+
+✅ STEP 5: Build & Push Docker Image to GCP
+dockerimage name: ckddocerimagegcp
+From inside your project folder:
+
+>gcloud builds submit --tag gcr.io/ckddockergcp-482409/ckddocerimagegcp .
+
+
+✔ This:
+
+Builds Docker image
+
+Pushes it to Google Container Registry
+
+Stores it as :latest
+
+✅ STEP 6: Deploy Docker Image to Cloud Run
+(Single-line command – Windows CMD)
+>gcloud run deploy ckddocerimagegcp --image gcr.io/ckddockergcp-482409/ckddocerimagegcp --platform managed --region us-central1 --allow-unauthenticated --port 5000
+
+
+When asked:
+
+Allow unauthenticated invocations? → Y
+
+✅ STEP 7: Access Your Live Application
+
+GCP will give you a URL like:
+
+https://ckddocerimagegcp-648650697336.us-central1.run.app/
+
+
+Open it in browser 🎉
+Your CKD prediction app is live.
+
+🧪 STEP 8: Verify Endpoints
+URL	Expected
+/	Input HTML form
+/predict	Prediction result
+/health	{ "status": "ok" }
+
+
+
+
