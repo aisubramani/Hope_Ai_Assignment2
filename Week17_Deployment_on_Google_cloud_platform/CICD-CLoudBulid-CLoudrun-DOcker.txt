@@ -1,0 +1,92 @@
+Install Git - Download from Internet
+
+Check correct installation
+Issue this command in the command Prompt
+>git --version
+
+Open Command Prompt
+-------------------
+>git config --global user.name aisubramani
+>git config --global user.email suresh1info@gmail.com
+
+
+Open Git bash
+---------------
+step1
+>ssh-agent -s
+ssh-keygen -t rsa -b 4096 -C suresh1info@gmail.com
+step2
+> .ssh/id_rsa
+
+-----
+step3
+$ ssh-keygen -t rsa -b 4096 -C suresh1info@gmail.com
+Generating public/private rsa key pair.
+Enter file in which to save the key (/c/Users/15016/.ssh/id_rsa): """give inside"".ssh/id_rsa"""""
+Enter passphrase for ".ssh/id_rsa" (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in .ssh/id_rsa
+Your public key has been saved in .ssh/id_rsa.pub
+The key fingerprint is:
+SHA256:Cd3pL3A64aySa5naswcu17kDmad7G42ncVH6egwX/9A suresh1info@gmail.com
+The key's randomart image is:
++---[RSA 4096]----+
+|                 |
+|       . . .     |
+|      . . +      |
+|       . =.      |
+|     o  S oo .   |
+|    = .=.B..o E  |
+|   . X+.O+o .o   |
+|  ..@ *B oo.  .  |
+|  .==O=+..       |
++----[SHA256]-----+
+
+15016@DESKTOP-H197TS6 MINGW64 ~
+$
+step 4
+get keycopy
+>clip < ~/.ssh/id_rsa.pub
+
+-----if error----------
+ssh-add ~/.ssh/id_rsa( if Error) 
+chmod 600 ~/.ssh/id_rsa
+clip < ~/.ssh/id_rsa.pub
+-------------------------------
+
+step 5
+Go to Gitgub-->Settings--> SSH and GPG key --> new ssh key  --->
+create name---> under box---> paste it it will give long key
+confirm key 
+
+Open command Prompt 
+>ssh -T git@github.com
+Give "yes"
+final Message
+Hi username! You've successfully authenticated, but GitHub does not provide shell access.
+
+Go to GitHub
+
+create New Repository
+http copy this
+git clone https://github.com/aisubramani/signspeakai.git -->(Automatically it creates folder in the working directory system)
+
+Automatically create signspeakai.git
+copy paste inside folder
+
+>cd ckdcicd
+
+copy all the files and paste it to the created directory
+------------
+>git add .
+>git commit -m "Initial commit"
+>git push origin main
+---------------
+
+open gcp
+create new project
+select yourproject and search cloud build
+
+git add cloudbuild.yaml
+
+git commit -m "add default option"
