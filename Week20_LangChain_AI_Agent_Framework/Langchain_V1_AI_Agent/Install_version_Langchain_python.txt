@@ -1,0 +1,70 @@
+anaconda
+>conda create -n langchainai python=3.12.7 -y
+>activate langchainai
+
+langchainai>pip install -U langchain langchain-core langchain-community langchain-openai langgraph langsmith
+
+(langchainai) C:\Users\15016>pip list | findstr langchain
+langchain                                1.2.0
+langchain-classic                        1.0.1
+langchain-community                      0.4.1
+langchain-core                           1.2.7
+langchain-openai                         1.1.7
+langchain-text-splitters                 1.1.0
+
+
+(langchainai) C:\Users\15016>pip list | findstr langgraph
+langgraph                1.0.5
+langgraph-checkpoint     3.0.1
+langgraph-prebuilt       1.0.5
+langgraph-sdk            0.3.1
+
+(langchainai) C:\Users\15016>pip list | findstr langsmith
+langsmith                0.5.2
+
+🔴 Option 1 — Jupyter Notebook (BEST & CORRECT)
+1️⃣ Install kernel for langchainai
+
+Run in Anaconda Prompt:
+>conda activate langchainai
+>pip install ipykernel
+>python -m ipykernel install --user --name langchainai --display-name "Python (langchainai)"
+
+Restart Jupyter
+langchainai>jupyter notebook
+
+3️⃣ In jupyter Notebook
+change Kerael
+Kernel → Change Kernel → Python (langchainai)
+
+
+llm = ChatOpenAI(
+    model="gpt-4o-mini",
+    temperature=0
+)
+
+
+#--------------------
+pip uninstall torch torchvision torchaudio -y
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+
+
+
+import sys, torch, transformers
+print("Python:", sys.version)
+print("Torch:", torch.__version__)
+print("Transformers:", transformers.__version__)
+
+Python: 3.12.7 | packaged by Anaconda, Inc. | (main, Oct  4 2024, 13:17:27) [MSC v.1929 64 bit (AMD64)]
+Torch: 2.5.1+cu121
+Transformers: 4.57.3
+
+------------
+import torch
+
+x = torch.rand(10000, 10000, device="cuda")
+y = torch.mm(x, x)
+print("GPU working:", y.mean().item())
+
+GPU working: 2499.881591796875
+Your NVIDIA GPU + CUDA + PyTorch + Python 3.12.7 stack is running at full speed
